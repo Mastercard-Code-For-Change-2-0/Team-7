@@ -20,6 +20,7 @@ export const userProfile = {
       dateRequested: '2025-08-24',
       imageUrl: 'https://placehold.co/600x400/ADD8E6/333?text=Blankets',
       status: 'Waiting for Admin to React',
+      requestedQty: 5,
     },
     {
       id: 5,
@@ -29,6 +30,7 @@ export const userProfile = {
       dateRequested: '2025-08-22',
       imageUrl: 'https://placehold.co/600x400/90EE90/333?text=Medical+Supplies',
       status: 'Waiting for Admin to React',
+      requestedQty: 3, 
     },
     {
       id: 7,
@@ -38,5 +40,6 @@ export const userProfile = {
       dateRequested: '2025-08-20',
       imageUrl: 'https://placehold.co/600x400/FFFFE0/333?text=Stationery',
       status: 'Waiting for Admin to React',
+      requestedQty: 2, 
     },
   ];
