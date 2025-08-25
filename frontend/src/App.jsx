@@ -1,9 +1,30 @@
 import { useState, useEffect } from 'react';
-import { Heart, Shield, Users, ArrowRight, CheckCircle, Menu, X } from 'lucide-react';
+import { Heart, Shield, Users, ArrowRight, CheckCircle, Menu, X, Eye, EyeOff } from 'lucide-react';
 
 export default function DonateConnectLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  // Login form state
+  const [loginData, setLoginData] = useState({   //login
+    userName: '',
+    password: '',
+    role: ''
+  });
+  
+  // Signup form state
+  const [signupData, setSignupData] = useState({  //signup
+    name: '',
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    role: ''
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +62,44 @@ export default function DonateConnectLanding() {
     { number: "04", title: "Impact Created", desc: "Meaningful connections and help delivered" }
   ];
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      if (!loginData.userName || !loginData.password || !loginData.role) {
+        alert("Please fill in all fields");
+        return;
+      }
+      // await LoginNormal(loginData.userName, loginData.password, loginData.role);
+      console.log("Login attempted:", loginData);
+      setLoginData({ userName: '', password: '', role: '' });
+      setShowLogin(false);
+    } catch (error) {
+      console.log(error);
+      alert("Invalid credentials. Please try again.");
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      if (signupData.password !== signupData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      if (!signupData.name || !signupData.userName || !signupData.email || !signupData.password || !signupData.role) {
+        alert("Please fill in all fields");
+        return;
+      }
+      // await SignUp(signupData.name, signupData.email, signupData.userName, signupData.password, signupData.confirmPassword, '', signupData.role);
+      console.log("Signup attempted:", signupData);
+      setSignupData({ name: '', userName: '', email: '', password: '', confirmPassword: '', role: '' });
+      setShowSignup(false);
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred during signup. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -74,10 +133,16 @@ export default function DonateConnectLanding() {
 
             {/* Auth Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <button className="px-4 py-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium">
+              <button 
+                onClick={() => setShowLogin(true)}
+                className="px-4 py-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+              >
                 Login
               </button>
-              <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+              <button 
+                onClick={() => setShowSignup(true)}
+                className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
                 Sign Up
               </button>
             </div>
@@ -105,10 +170,16 @@ export default function DonateConnectLanding() {
                   About
                 </a>
                 <div className="flex flex-col space-y-2 pt-4 border-t">
-                  <button className="px-4 py-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium">
+                  <button 
+                    onClick={() => setShowLogin(true)}
+                    className="px-4 py-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                  >
                     Login
                   </button>
-                  <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-medium">
+                  <button 
+                    onClick={() => setShowSignup(true)}
+                    className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-medium"
+                  >
                     Sign Up
                   </button>
                 </div>
@@ -140,7 +211,10 @@ export default function DonateConnectLanding() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-              <button className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center">
+              <button 
+                onClick={() => setShowSignup(true)}
+                className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center"
+              >
                 Start Giving Today
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -260,12 +334,18 @@ export default function DonateConnectLanding() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button className="group px-8 py-4 bg-white text-indigo-600 rounded-2xl hover:bg-gray-50 transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center">
+            <button 
+              onClick={() => setShowSignup(true)}
+              className="group px-8 py-4 bg-white text-indigo-600 rounded-2xl hover:bg-gray-50 transition-all duration-300 font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center"
+            >
               Join as Donor
               <Heart className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
             </button>
             
-            <button className="px-8 py-4 bg-transparent text-white rounded-2xl border-2 border-white hover:bg-white hover:text-indigo-600 transition-all duration-300 font-semibold text-lg">
+            <button 
+              onClick={() => setShowSignup(true)}
+              className="px-8 py-4 bg-transparent text-white rounded-2xl border-2 border-white hover:bg-white hover:text-indigo-600 transition-all duration-300 font-semibold text-lg"
+            >
               Join as Receiver
             </button>
           </div>
@@ -334,6 +414,221 @@ export default function DonateConnectLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md transform transition-all duration-300 scale-100">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  Welcome Back
+                </h2>
+                <button 
+                  onClick={() => setShowLogin(false)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              <form onSubmit={handleLogin} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Role</label>
+                  <select
+                    value={loginData.role}
+                    onChange={(e) => setLoginData({...loginData, role: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  >
+                    <option value="">Select your role</option>
+                    <option value="donor">Donor</option>
+                    <option value="receiver">Receiver</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
+                  <input
+                    type="text"
+                    value={loginData.userName}
+                    onChange={(e) => setLoginData({...loginData, userName: e.target.value})}
+                    placeholder="Enter your username"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={loginData.password}
+                      onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                      placeholder="Enter your password"
+                      className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  Sign In
+                </button>
+              </form>
+
+              <div className="mt-8 text-center">
+                <p className="text-gray-600">
+                  Don't have an account?{' '}
+                  <button 
+                    onClick={() => {setShowLogin(false); setShowSignup(true);}}
+                    className="text-indigo-600 hover:text-indigo-700 font-semibold"
+                  >
+                    Sign up
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Signup Modal */}
+      {showSignup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md transform transition-all duration-300 scale-100 max-h-[90vh] overflow-y-auto">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  Join Us Today
+                </h2>
+                <button 
+                  onClick={() => setShowSignup(false)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              <form onSubmit={handleSignup} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Role</label>
+                  <select
+                    value={signupData.role}
+                    onChange={(e) => setSignupData({...signupData, role: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  >
+                    <option value="">Select your role</option>
+                    <option value="donor">Donor - I want to give</option>
+                    <option value="receiver">Receiver - I need help</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                  <input
+                    type="text"
+                    value={signupData.name}
+                    onChange={(e) => setSignupData({...signupData, name: e.target.value})}
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
+                  <input
+                    type="text"
+                    value={signupData.userName}
+                    onChange={(e) => setSignupData({...signupData, userName: e.target.value})}
+                    placeholder="Choose a username"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    value={signupData.email}
+                    onChange={(e) => setSignupData({...signupData, email: e.target.value})}
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={signupData.password}
+                      onChange={(e) => setSignupData({...signupData, password: e.target.value})}
+                      placeholder="Create a password"
+                      className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      value={signupData.confirmPassword}
+                      onChange={(e) => setSignupData({...signupData, confirmPassword: e.target.value})}
+                      placeholder="Confirm your password"
+                      className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50 hover:bg-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  Create Account
+                </button>
+              </form>
+
+              <div className="mt-8 text-center">
+                <p className="text-gray-600">
+                  Already have an account?{' '}
+                  <button 
+                    onClick={() => {setShowSignup(false); setShowLogin(true);}}
+                    className="text-indigo-600 hover:text-indigo-700 font-semibold"
+                  >
+                    Sign in
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
