@@ -1,0 +1,57 @@
+[
+    {
+      "_id": "63a5e3c1f1b2c3d4e5f6a7b1",
+      "userId": "63a5e3c1f1b2c3d4e5f6a7a1",
+      "name": "Anjali Sharma",
+      "description": "Slightly used textbooks for Class 10 (CBSE)",
+      "imgUrl": "https://placehold.co/600x400/E6E6FA/333?text=Textbooks",
+      "state": "approved",
+      "tag": ["education", "books", "study"],
+      "location": "Mumbai",
+      "date": "2025-08-15T00:00:00.000Z"
+    },
+    {
+      "_id": "63a5e3c1f1b2c3d4e5f6a7b2",
+      "userId": "63a5e3c1f1b2c3d4e5f6a7a2",
+      "name": "Rohan Verma",
+      "description": "Warm blankets and winter wear for adults",
+      "imgUrl": "https://placehold.co/600x400/ADD8E6/333?text=Blankets",
+      "state": "approved",
+      "tag": ["clothing", "winter", "essentials"],
+      "location": "Pune",
+      "date": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "_id": "63a5e3c1f1b2c3d4e5f6a7b3",
+      "userId": "63a5e3c1f1b2c3d4e5f6a7a3",
+      "name": "Priya Mehta",
+      "description": "Kitchen utensils and non-perishable food items",
+      "imgUrl": "https://placehold.co/600x400/FFDAB9/333?text=Utensils",
+      "state": "approved",
+      "tag": ["household", "food", "kitchen"],
+      "location": "Delhi",
+      "date": "2025-07-20T00:00:00.000Z"
+    },
+    {
+      "_id": "63a5e3c1f1b2c3d4e5f6a7b4",
+      "userId": "63a5e3c1f1b2c3d4e5f6a7a4",
+      "name": "Vikram Singh",
+      "description": "Educational toys and board games for children",
+      "imgUrl": "https://placehold.co/600x400/F08080/333?text=Toys",
+      "state": "pending",
+      "tag": ["children", "toys", "education"],
+      "location": "Mumbai",
+      "date": "2025-08-05T00:00:00.000Z"
+    },
+    {
+      "_id": "63a5e3c1f1b2c3d4e5f6a7b5",
+      "userId": "63a5e3c1f1b2c3d4e5f6a7a5",
+      "name": "Sunita Patil",
+      "description": "First-aid kits and basic medical supplies",
+      "imgUrl": "https://placehold.co/600x400/90EE90/333?text=Medical+Supplies",
+      "state": "approved",
+      "tag": ["medical", "health", "essentials"],
+      "location": "Bangalore",
+      "date": "2025-07-25T00:00:00.000Z"
+    }
+  ]
