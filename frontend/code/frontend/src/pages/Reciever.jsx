@@ -1,7 +1,7 @@
 // src/pages/LandingPage.jsx (or wherever you want to use it)
 
 import React from 'react';
-import Navbar from '../components/Navbar'; // Adjust the import path as needed
+import RecieverPortal from '../components/RecieverPortal'; // Adjust the import path as needed
 
 function LandingPageReciever() {
   return (

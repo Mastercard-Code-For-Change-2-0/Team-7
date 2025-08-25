@@ -1,11 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import RecieverPortal from './components/RecieverPortal';
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <RecieverPortal />
       <main>
         
         <Outlet />
