@@ -11,7 +11,7 @@ import SignupModal from './components/Auth/SignupModal';
 import AdminDashboard from './components/admin/AdminDashboard.jsx';
 
 export default function DonateConnectLanding() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpe  n, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
