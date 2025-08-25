@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Heart, Shield, Users, ArrowRight, CheckCircle, Menu, X, Eye, EyeOff } from 'lucide-react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Features from './components/Features';
+import HowItWorks from './components/HowItWorks';
+import CTA from './components/CTA';
+import Footer from './components/Footer';
+import LoginModal from './components/Auth/LoginModal';
+import SignupModal from './components/Auth/SignupModal';
+import AdminDashboard from './components/admin/AdminDashboard.jsx';
 
 export default function DonateConnectLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +80,8 @@ export default function DonateConnectLanding() {
       }
       // await LoginNormal(loginData.userName, loginData.password, loginData.role);
       console.log("Login attempted:", loginData);
+      // If admin, navigate via react-router path
+      if (loginData.role === 'admin') window.location.assign('/adminDashboard');
       setLoginData({ userName: '', password: '', role: '' });
       setShowLogin(false);
     } catch (error) {
@@ -92,6 +103,7 @@ export default function DonateConnectLanding() {
       }
       // await SignUp(signupData.name, signupData.email, signupData.userName, signupData.password, signupData.confirmPassword, '', signupData.role);
       console.log("Signup attempted:", signupData);
+      if (signupData.role === 'admin') window.location.assign('/adminDashboard');
       setSignupData({ name: '', userName: '', email: '', password: '', confirmPassword: '', role: '' });
       setShowSignup(false);
     } catch (error) {
